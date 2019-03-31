@@ -1,7 +1,9 @@
 from ecdsa import SigningKey, NIST384p
 from flask import Flask
 
-from Transaction import createSigningKey
+from Block import *
+from Transaction import *
+from wallet import *
 
 app = Flask(__name__)
 
@@ -13,13 +15,13 @@ def hello():
 def generateKey():
     arq = open('key.txt', 'w')
     sk = createSigningKey()
-    arq.writelines(str(sk))
+    arq.writelines(str(sk.to_string()))
     arq.close()
     return 'Key gerada e salva com sucesso'
 
 @app.route('/coinbase')
 def coinbase():
-    return COINBASE
+    return str(COINBASE)
 
 @app.route('/validatingTransactionId', methods=['POST'])
 def validanting(id, transaction):
@@ -32,6 +34,13 @@ def validanting(id, transaction):
             return 'Transação inválida'
     else:
         return 'Erro'
+
+@app.route('/generateTransaction', methods=['POST'])
+def generateTransaction(address, addressFrom, amount, leftover):
+    key = open('private.pem', 'r').read()
+    res = createTransaction(address, addressFrom, amount, leftover, key)
+    transactionPool.append(res)
+    return 'Transação adicionada a pool'
 
 
 if __name__ == '__main__':

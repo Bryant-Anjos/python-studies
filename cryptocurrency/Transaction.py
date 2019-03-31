@@ -4,6 +4,8 @@ from ecdsa import SigningKey, NIST384p
 
 COINBASE = 100
 
+transactionPool = []
+
 class Transaction:
     def __init__(self):
         self.id = None

@@ -82,5 +82,5 @@ def calculateHash(index, previousHash, timestamp, data, difficulty, nonce):
         (str(index) + previousHash + str(timestamp) + data + str(difficulty) + str(nonce)).encode('utf-8')).hexdigest()
 
 
-ts = int(round(time.time() * 1000))
-genesisBlock = Block(0, '', ts, 'Genesis Block', calculateHash(0, '', ts, 'Genesis Block'))
+#ts = int(round(time.time() * 1000))
+#genesisBlock = Block(0, '', ts, 'Genesis Block', calculateHash(0, '', ts, 'Genesis Block'))
