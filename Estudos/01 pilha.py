@@ -33,7 +33,13 @@ s = Stack()
 s.push(1)
 s.push(2)
 s.push(3)
-s.pop()
-s.pop()
-s.pop()
+
 print(s.top())
+print(s.length())
+
+s.pop()
+s.pop()
+s.pop()
+
+print(s.top())
+print(s.length())
